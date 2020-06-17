@@ -6,6 +6,7 @@ CONFIG -= qt
 SOURCES += \
         Employee.cpp \
         Helpper.cpp \
+        RollCallHistory.cpp \
         StatusDate.cpp \
         main.cpp
 

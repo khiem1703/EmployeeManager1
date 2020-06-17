@@ -2,12 +2,14 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <Employee.h>
+#include<map>
 #include <Helpper.h>
 #include <iostream>
 #include <cstring>
 
+#include <Employee.h>
 #include <StatusDate.h>
+#include<RollCallHistory.h>
 
 
 using namespace std;
@@ -15,6 +17,7 @@ using namespace std;
 
 int main()
 {
+    cout<<"khiem"<<endl;
     // lấy data từ file gốc
     vector<Employee*> list;
     Employee *employee;
@@ -36,6 +39,9 @@ int main()
         cout <<"= 3-In ra tat ca " << endl;
         cout <<"= 4-Import nhan vien" << endl;
         cout <<"= 5-Diem danh nhan vien" << endl;
+        cout <<"= 6-Xem lich su diem danh nhan vien" << endl;
+
+
 
 
 
@@ -81,6 +87,7 @@ int main()
 
             // phần này chỉ lấy ra số dòng trong file csv và xuống khỏi dòng đầu tiên
             ifstream ifs(path, ios::in);
+
             string abc;
             ifs >> abc;
             char ss[5];
@@ -89,8 +96,12 @@ int main()
             //đếm số dòng trong file
             int n;
             n=Helpper ::numberLine(path); // lấy ra số dòng
+            cout <<n <<endl;
+
             n=n-1;
-            //cout<<"so dong trong file import la"<<n<< endl;
+            cout <<n <<endl;
+
+
 
             // dùng để lấy đc dòng nào bị sai
             int line=1 ;
@@ -98,19 +109,17 @@ int main()
 
             // thêm các nhân viên vào list để dễ thao tác
 
-            fstream output("C:\\Users\\khiem\\Desktop\\Data.csv", ios::app); // mở file Data đề đọc dữ liệu từ import rồi ghi vào
+
 
 
             Employee *employee;
             for (int i=0 ; i < n ; i++){
                 employee = new Employee();
                 employee->readImport(ifs ,list ,linePtr);
-
-                output << employee->getId()<<","<<employee->getName()<<","<<employee->getDateOfBirth()
-                       <<","<<employee->getAddress()<<","<<employee->getDepartment()<<endl;
+               // cout<<employee->getId()<<endl;
                 list.push_back(employee);
             }
-            output.close();
+
             ifs.close();
 
 
@@ -119,6 +128,13 @@ int main()
             // nhập vào id , nhập vào ngày muốn điểm danh ,nhập vào trạng thái muốn điểm danh
             StatusDate::addOrUpdateStatus(list);
 
+        }
+        else if(choice == 6){
+            map<string ,string> map1;
+            map1 =RollCallHistory::filterByMonth(list);
+            for (map<string ,string> :: iterator it =map1.begin(); it !=map1.end(); it++) {
+                cout<<it->first <<", " << it->second<<endl;
+            }
         }
         else{
             break;

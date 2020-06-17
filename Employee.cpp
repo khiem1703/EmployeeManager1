@@ -128,7 +128,7 @@ void Employee ::readData(ifstream &in ,vector<Employee*> list){
 
 void Employee::readImport(ifstream &in ,vector<Employee*> list ,int *linePtr){
 
-    fstream output("C:\\Users\\khiem\\Desktop\\ImportData.csv", ios::app);
+
     char lines[500];
     fflush(stdin);
     in.getline(lines,500);
@@ -156,8 +156,9 @@ void Employee::readImport(ifstream &in ,vector<Employee*> list ,int *linePtr){
     this->setDateOfBirth(v.at(2));
     this->setAddress(v.at(3));
     this->setDepartment(v.at(4));
-    output <<_id <<","<<_name<<","<<_dateOfBirth<<","<<_address<<","<<_department<<endl;
 
+    fstream output("C:\\Users\\khiem\\Desktop\\Data.csv", ios::app);
+    output <<_id <<","<<_name<<","<<_dateOfBirth<<","<<_address<<","<<_department<<endl;
     output.close();
 
 
