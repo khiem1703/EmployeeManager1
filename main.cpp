@@ -90,6 +90,7 @@ int main()
             int n;
             n=Helpper ::numberLine(path); // lấy ra số dòng
             n=n-1;
+            //cout<<"so dong trong file import la"<<n<< endl;
 
             // dùng để lấy đc dòng nào bị sai
             int line=1 ;
@@ -97,14 +98,19 @@ int main()
 
             // thêm các nhân viên vào list để dễ thao tác
 
+            fstream output("C:\\Users\\khiem\\Desktop\\Data.csv", ios::app); // mở file Data đề đọc dữ liệu từ import rồi ghi vào
+
 
             Employee *employee;
             for (int i=0 ; i < n ; i++){
                 employee = new Employee();
                 employee->readImport(ifs ,list ,linePtr);
 
+                output << employee->getId()<<","<<employee->getName()<<","<<employee->getDateOfBirth()
+                       <<","<<employee->getAddress()<<","<<employee->getDepartment()<<endl;
                 list.push_back(employee);
             }
+            output.close();
             ifs.close();
 
 
